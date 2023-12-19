@@ -27,16 +27,17 @@
 
 :root {
   --astro-code-color-text: #000000;
-  --astro-code-color-background: #ececec;
+  --astro-code-color-background: #f5f5f5;
   --astro-code-token-constant: #00000080;
   --astro-code-token-string: #00000050;
   --astro-code-token-comment: #00000060;
   --astro-code-token-keyword: black;
   --astro-code-token-parameter: #ffffff;
   --astro-code-token-function: black;
-  --astro-code-token-string-expression: #0000ff;
+  --astro-code-token-string-expression: #fe351b;
   --astro-code-token-punctuation: #ffffff;
   --astro-code-token-link: #ffffff;
+
 }
 
 

@@ -1,5 +1,5 @@
 ---
-const { title, url, description, pubDate, author, image } = Astro.props;
+const { title, url, description, pubDate, author, image, tags } = Astro.props;
 ---
 
 <li>
@@ -7,31 +7,35 @@ const { title, url, description, pubDate, author, image } = Astro.props;
     <article class="flex-1 h-full flex flex-col">
       <div class="block w-full lg:col-span-2">
         <img
-          class="aspect-[384/246] object-cover bg-center h-full"
+          class="aspect-[2/3] object-cover bg-center h-full w-full"
           src={image}
           alt={title}
         />
       </div>
-      <div class="flex flex-col items-start justify-between flex-1 w-full mt-4">
-        <div class="w-full">
-          <div>
-            <p class="font-medium text-black">{title}</p>
-          </div>
-          <p class="mt-2 text-sm text-gray-600 line-clamp-3">
-            {description}
-          </p>
-        </div>
-        <footer>
-          <div class="inline-flex space-x-1 items-center mt-6">
-            <p class="text-xs font-medium text-gray-900">
-              {author}
-            </p>
+      <div
+        class="flex flex-col items-start justify-between h-full flex-1 w-full p-4"
+      >
+        <div>
+          <div class="inline-flex space-x-1 items-center">
+            <p class="text-xs font-medium text-black">{author}</p>
             <span aria-hidden="true">&middot;</span>
-            <div class="flex text-xs text-gray-500">
-              <time datetime="2020-03-16"> {pubDate}</time>
+            <div class="flex text-xs text-gray-400">
+              <time datetime="2020-03-16">{pubDate}</time>
             </div>
           </div>
-        </footer>
+          <p class="text-black mt-2 font-display text-xl">
+            {title}
+          </p>
+        </div>
+        <p class="mt-4 text-sm text-gray-500 line-clamp-2">{description}</p>
+
+        <div class="mt-4 flex space-x-2">
+          {
+            tags.map((tag) => (
+              <span class="text-xs font-medium text-black">{tag}</span>
+            ))
+          }
+        </div>
       </div>
     </article>
   </a>

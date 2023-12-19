@@ -92,9 +92,7 @@ module.exports = {
       ],
     },
     extend: {
-
       colors: {
-
         blue: {
          50: "#EBEBFF",
       100: "#D2D2FE",
@@ -111,6 +109,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ["Inter", ...defaultTheme.fontFamily.sans],
+        display: ["Gilda Display", ...defaultTheme.fontFamily.sans],
         mono: ["JetBrains Mono", ...defaultTheme.fontFamily.mono],
       },
     },

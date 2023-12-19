@@ -3,6 +3,7 @@ import BaseLayout from "./BaseLayout.astro";
 const { frontmatter } = Astro.props;
 import { AstroSeo } from "@astrolib/seo";
 ---
+
 <!---
 Use AstroSeo in all the pages you want different Seo than the index page
 -->
@@ -41,23 +42,42 @@ Use AstroSeo in all the pages you want different Seo than the index page
   }}
 />
 <BaseLayout>
-  <div
-    class="mx-auto hover:prose-a:text-black prose prose-a:text-accent-500 prose-blockquote:border-l-black prose-blockquote:text-gray-500 prose-code:text-black prose-headings:font-bold prose-headings:text-black prose-headings:tracking-tighter prose-li:marker:text-accent-500 text-gray-500 py-24 prose-pre:border"
-  >
-    <p>{frontmatter.pubDate.toString().slice(0, 10)}</p>
-    <p>{frontmatter.title}</p>
-    <p><em>{frontmatter.description}</em></p>
-    <p>Written by: {frontmatter.author}</p>
-    <div class="flex flex-wrap gap-3 mt-12">
-      {
-        frontmatter.tags.map((tag) => (
-          <span class="inline-flex items-center text-sm font-light text-black dark:text-white  underline hover:text-accent-300">
-            <a href={`/tags/${tag}`}>{tag}</a>
-          </span>
-        ))
-      }
+  <section>
+    <div class="px-8 py-12 md:px-12 mx-auto lg:pt-24 max-w-7xl lg:px-32">
+      <div class="lg:text-center">
+        <img
+          class="lg:h-72 w-full  object-cover object-center"
+          src={frontmatter.image.url}
+          alt={frontmatter.image.alt}
+          />
+         <div class="flex  flex-col md:flex-row mt-4 justify-between">
+            <p class="text-xs text-zinc-500 ">{frontmatter.pubDate.toString().slice(0, 10)} - Written by: {frontmatter.author}</p>
+           <div class="flex gap-3">
+              {
+                frontmatter.tags.map((tag) => (
+                  <span class="inline-flex items-center uppercase    hover:text-blue-500   text-xs font-medium text-black">
+                    <a href={`/tags/${tag}`}>{tag}</a>
+                  </span>
+                ))
+              }
+           </div>
+         </div>
+        <h1
+        class="text-4xl tracking-tight text-balance mt-12 lg:mt-16 font-medium font-display text-black md:text-8xl"
+        >
+        {frontmatter.title}
+      </h1>
+        <p class="max-w-2xl mt-8 mx-auto text-zinc-500">
+          <em>{frontmatter.description}</em>
+        </p>
+
+      </div>
+
+      <div class="mt-12">
+        <div class="prose-styles">
+          <slot />
+        </div>
+      </div>
     </div>
-    <img src={frontmatter.image.url} alt={frontmatter.image.alt} />
-    <slot />
-  </div>
+  </section>
 </BaseLayout>

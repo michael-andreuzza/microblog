@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import EntriesOne from "@/components/entries/EntriesOne.astro";
 import Hero from "@/components/landing/Hero.astro";
+import Cta from "@/components/global/Cta.astro";
 const allPosts = await getCollection("posts");
 const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
 ---
@@ -42,4 +43,5 @@ const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
       </ul>
     </div>
   </section>
+  <Cta/>
 </BaseLayout>

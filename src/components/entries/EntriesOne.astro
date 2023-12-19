@@ -19,7 +19,7 @@ const { title, url, description, pubDate, author, image, tags } = Astro.props;
           <div class="inline-flex space-x-1 items-center">
             <p class="text-xs font-medium text-black">{author}</p>
             <span aria-hidden="true">&middot;</span>
-            <div class="flex text-xs text-gray-400">
+            <div class="flex text-xs text-zinc-400">
               <time datetime="2020-03-16">{pubDate}</time>
             </div>
           </div>
@@ -27,7 +27,7 @@ const { title, url, description, pubDate, author, image, tags } = Astro.props;
             {title}
           </p>
         </div>
-        <p class="mt-4 text-sm text-gray-500 line-clamp-2">{description}</p>
+        <p class="mt-4 text-sm text-zinc-500 line-clamp-2">{description}</p>
 
         <div class="mt-4 flex space-x-2">
           {

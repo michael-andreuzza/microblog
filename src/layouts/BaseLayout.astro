@@ -8,9 +8,9 @@ import Footer from "@/components/global/Footer.astro";
   <head>
     <BaseHead />
   </head>
-  <body class="bg-white">
+  <body class="bg-white flex flex-col min-h-screen">
     <Navigation />
-    <slot />
+    <main class="flex-grow"><slot /></main>
     <Footer />
   </body>
 </html>

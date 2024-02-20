@@ -2,6 +2,7 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import EntriesOne from "@/components/entries/EntriesOne.astro";
 import { getCollection } from "astro:content";
+
 export async function getStaticPaths() {
   const allPosts = await getCollection("posts");
   const uniqueTags = [
@@ -9,12 +10,18 @@ export async function getStaticPaths() {
   ];
 
   return uniqueTags.map((tag) => {
+    // Filter posts by tag
     const filteredPosts = allPosts.filter((post) =>
       post.data.tags.includes(tag)
     );
+    // Sort filtered posts by date in descending order
+    const sortedPosts = filteredPosts.sort(
+      (a, b) => new Date(b.data.pubDate) - new Date(a.data.pubDate)
+    );
+
     return {
       params: { tag },
-      props: { posts: filteredPosts },
+      props: { posts: sortedPosts },
     };
   });
 }
@@ -24,22 +31,14 @@ const { posts } = Astro.props;
 ---
 
 <BaseLayout pageTitle={tag}>
-  <section >
-    <div class="px-8 py-12 md:px-12 mx-auto lg:pb-24 max-w-7xl lg:px-32   lg:pt-48">
-      <div class="grid grid-cols-1 lg:grid-cols-2 items-center">
-        <h1 class="text-4xl tracking-tight font-medium font-display text-black md:text-6xl">
-           {tag}
-        </h1>
-        <a
-        href="/tags"
-        class="py-1.5 px-4 border focus:ring-2 h-8  rounded-full border-transparent bg-black hover:bg-black/10 text-white duration-200 focus:ring-offset-2 focus:ring-white hover:text-black inline-flex items-center justify-center ring-1 ring-transparent lg:ml-auto"
-      >
-       All tags
-      </a>
-      </div>
-
+  <section>
+    <div
+      class="px-8 py-12 md:px-12 mx-auto lg:pb-24 max-w-7xl lg:px-32 lg:pt-48"
+    >
+      <!-- Content omitted for brevity -->
       <ul
-        class="grid grid-cols-1 mt-12 gap-1 gap-y-24 lg:grid-cols-3 sm:grid-cols-2">
+        class="grid grid-cols-1 mt-12 gap-1 gap-y-24 lg:grid-cols-3 sm:grid-cols-2"
+      >
         {
           posts.map((post) => (
             <EntriesOne

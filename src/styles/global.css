@@ -1,22 +1,37 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/forms";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Gilda Display", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  /* Colors */
+  --color-blue-50: #ebebff;
+  --color-blue-100: #d2d2fe;
+  --color-blue-200: #a6a4fe;
+  --color-blue-300: #7e7cfd;
+  --color-blue-400: #524ffd;
+  --color-blue-500: #2522fc;
+  --color-blue-600: #0703e2;
+  --color-blue-700: #0502ab;
+  --color-blue-800: #03026f;
+  --color-blue-900: #020137;
+  --color-blue-950: #01001e;
+}
+.font-display {
+   font-family: var(--font-display);
+}
+.font-sans {
+  font-family: var(--font-sans);
+}
+.font-mono {
+  font-family: var(--font-mono);
+}
+
 /* CSS */
 :root {
   font-family: Inter, sans-serif;
-  font-feature-settings:
-  "liga" 1,
-  "calt" 1, /* Contextual Alternates */
-  "dlig" 1, /* Discretionary Ligatures */
-  "ss07" 1, /* fSquare punctuation */
-  "ss08" 1, /* Square quotes */
-  "zero" 1, /* Slashed zero */
-  "tnum" 1, /* Tabular numbers */
-    "cv03" 1, /* Open six */
-    "cv04" 1, /* Open nine */
-    "cv01" 1, /* Alternate one */
-    "cv09", /* Flat-top three */
-    "cv02" 1; /* Open 4 */
 }
 @supports (font-variation-settings: normal) {
   /* Use variable font if supported */
@@ -37,10 +52,6 @@
   --astro-code-token-string-expression: #fe351b;
   --astro-code-token-punctuation: #ffffff;
   --astro-code-token-link: #ffffff;
-
 }
 
 
-.prose-styles {
-  @apply text-sm prose text-neutral-600 dark:text-neutral-600 prose-a:font-normal prose-a:text-blue-400 hover:prose-a:text-black prose-h1:text-black prose-img:border-2  prose-img:bg-neutral-50 dark:prose-img:bg-neutral-800 prose-img:border-transparent dark:prose-img:invert prose-h2:text-black prose-h2:font-semibold prose-p:text-sm prose-pre:font-mono max-w-none prose-pre:rounded-none prose-headings:font-display;
-}

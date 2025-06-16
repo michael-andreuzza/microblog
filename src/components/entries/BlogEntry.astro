@@ -1,0 +1,32 @@
+---
+import { Image } from "astro:assets";
+const { title, url, description, pubDate, author, image, tags } = Astro.props;
+---
+
+<article class="flex flex-col flex-1 h-full">
+  <a href={url} title={title} class="group block">
+    <div class="block w-full lg:col-span-2">
+      <Image
+        width={1200}
+        height={630}
+        src={image}
+        alt={title}
+        class="object-cover w-full h-full bg-center aspect-12/8 rounded-xl"
+      />
+    </div>
+  </a>
+
+  <div class="mt-1">
+    <div class="flex items-center space-x-1 text-xs text-base-500">
+      <span class="font-medium">{author}</span>
+      <span aria-hidden="true">&middot;</span>
+      <time datetime={pubDate}>{pubDate}</time>
+    </div>
+
+    <h3 class="mt-4 text-base text-base-900 text-balance">
+      <a href={url} class="hover:underline">{title}</a>
+    </h3>
+
+    <p class="mt-1 text-sm text-base-500 line-clamp-2">{description}</p>
+  </div>
+</article>

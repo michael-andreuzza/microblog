@@ -1,0 +1,51 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout>
+  <section>
+    <div class="py-24">
+      <div class="lg:text-center">
+        <div class="max-w-xl mx-auto">
+          <h1
+            class="text-4xl text-balance font-medium font-display text-base-900"
+          >
+            {frontmatter.title}
+          </h1>
+          <p class="max-w-2xl mx-auto mt-4 text-zinc-500 text-sm text-balance">
+            <em>{frontmatter.description}</em>
+          </p>
+        </div>
+        <Image
+          width={1280}
+          height={720}
+          src={frontmatter.image.url}
+          alt={frontmatter.image.alt}
+          class="object-cover object-center w-full aspect-12/7 rounded-xl mt-4"
+        />
+        <div class="flex flex-col justify-between mt-4 md:flex-row">
+          <p class="text-xs text-zinc-500">
+            {frontmatter.pubDate.toString().slice(0, 10)} - Written by: {
+              frontmatter.author
+            }
+          </p>
+          <div class="flex gap-3">
+            {
+              frontmatter.tags.map((tag) => (
+                <span class="hover:text-blue-500 text-xs font-medium text-base-600">
+                  <a href={`/tags/${tag}`}>{tag}</a>
+                </span>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="prose prose-sm max-w-md mt-12 mx-auto">
+        <slot />
+      </div>
+    </div>
+  </section>
+</BaseLayout>

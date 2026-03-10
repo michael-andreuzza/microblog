@@ -7,7 +7,8 @@ const allPosts = await getCollection("posts");
 const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
 // Sort posts by date in descending order (newest first)
 const sortedPosts = allPosts.sort(
-  (a, b) => new Date(b.data.pubDate) - new Date(a.data.pubDate)
+  (a, b) =>
+    new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
 );
 ---
 
@@ -35,7 +36,7 @@ const sortedPosts = allPosts.sort(
         {
           sortedPosts.map((post) => (
             <BlogEntries
-              url={"/posts/" + post.slug}
+              url={"/posts/" + post.id}
               alt={post.data.title}
               tags={post.data.tags}
               title={post.data.title}

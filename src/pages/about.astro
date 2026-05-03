@@ -1,0 +1,27 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import BlogEntries from "@/components/entries/BlogEntry.astro";
+import Cta from "@/components/global/Cta.astro";
+import { getCollection } from "astro:content";
+const allPosts = await getCollection("posts");
+const tags = [...new Set(allPosts.map((post) => post.data.tags).flat())];
+// Sort posts by date in descending order (newest first)
+const sortedPosts = allPosts.sort(
+  (a, b) =>
+    new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+);
+---
+
+<BaseLayout>
+  <section>
+    <div class="py-24">
+      <h1
+        class="text-4xl text-balance font-medium font-display text-base-900 max-w-xl"
+      >
+        About Tone Transmissions
+      </h1>
+      
+      <p>This site is a place to share thoughts on guitar pedals.</p>
+    </div>
+  </section>
+</BaseLayout>

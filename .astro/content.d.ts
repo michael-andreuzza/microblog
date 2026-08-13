@@ -96,6 +96,10 @@ declare module 'astro:content' {
 		entry: DataEntryMap[C][string],
 	): Promise<RenderResult>;
 
+	export function render<C extends keyof LiveContentConfig['collections']>(
+		entry: import('astro').LiveDataEntry<LiveLoaderDataType<C>>,
+	): Promise<RenderResult>;
+
 	export function reference<
 		C extends
 			| keyof DataEntryMap
@@ -122,11 +126,12 @@ declare module 'astro:content' {
 	type InferEntrySchema<C extends keyof DataEntryMap> = import('astro/zod').infer<
 		ReturnTypeOrOriginal<Required<ContentConfig['collections'][C]>['schema']>
 	>;
+	type ExtractLoaderConfig<T> = T extends { loader: infer L } ? L : never;
 	type InferLoaderSchema<
 		C extends keyof DataEntryMap,
-		L = Required<ContentConfig['collections'][C]>['loader'],
+		L = ExtractLoaderConfig<ContentConfig['collections'][C]>,
 	> = L extends { schema: import('astro/zod').ZodSchema }
-		? import('astro/zod').infer<Required<ContentConfig['collections'][C]>['loader']['schema']>
+		? import('astro/zod').infer<L['schema']>
 		: any;
 
 	type DataEntryMap = {
@@ -137,6 +142,7 @@ declare module 'astro:content' {
   data: InferEntrySchema<"posts">;
   rendered?: RenderedContent;
   filePath?: string;
+  digest?: string | number;
 }>;
 
 	};
@@ -152,6 +158,7 @@ declare module 'astro:content' {
 	type ExtractEntryFilterType<T> = ExtractLoaderTypes<T>['entryFilter'];
 	type ExtractCollectionFilterType<T> = ExtractLoaderTypes<T>['collectionFilter'];
 	type ExtractErrorType<T> = ExtractLoaderTypes<T>['error'];
+	type ExtractDataType<T> = ExtractLoaderTypes<T>['data'];
 
 	type LiveLoaderDataType<C extends keyof LiveContentConfig['collections']> =
 		LiveContentConfig['collections'][C]['schema'] extends undefined
